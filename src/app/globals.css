@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design Tokens ─────────────────────────────────────────── */
+@layer base {
+  :root {
+    /* Light mode */
+    --background: 240 20% 98%;
+    --foreground: 240 15% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 15% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 15% 10%;
+
+    --primary: 263 90% 64%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 10% 94%;
+    --secondary-foreground: 240 15% 20%;
+
+    --muted: 240 10% 94%;
+    --muted-foreground: 240 8% 46%;
+
+    --accent: 186 96% 42%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 8% 88%;
+    --input: 240 8% 88%;
+    --ring: 263 90% 64%;
+
+    --radius: 0.75rem;
+
+    /* Glass surface (light) */
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(139, 71, 255, 0.15);
+    --glass-shadow: 0 8px 32px rgba(139, 71, 255, 0.08);
+  }
+
+  .dark {
+    --background: 240 25% 6%;
+    --foreground: 240 10% 92%;
+
+    --card: 240 20% 10%;
+    --card-foreground: 240 10% 92%;
+
+    --popover: 240 20% 10%;
+    --popover-foreground: 240 10% 92%;
+
+    --primary: 263 90% 68%;
+    --primary-foreground: 240 25% 6%;
+
+    --secondary: 240 15% 16%;
+    --secondary-foreground: 240 10% 80%;
+
+    --muted: 240 15% 16%;
+    --muted-foreground: 240 8% 55%;
+
+    --accent: 186 80% 50%;
+    --accent-foreground: 240 25% 6%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 12% 18%;
+    --input: 240 12% 18%;
+    --ring: 263 90% 68%;
+
+    /* Glass surface (dark) */
+    --glass-bg: rgba(20, 20, 40, 0.6);
+    --glass-border: rgba(139, 71, 255, 0.2);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* ── Base Resets ────────────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.25);
+    color: hsl(var(--foreground));
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.4);
+  }
+}
+
+/* ── Utility Classes ────────────────────────────────────────── */
+@layer utilities {
+  .glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+  }
+
+  .glass-card {
+    @apply glass rounded-xl;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .shimmer-bg {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--muted)) 25%,
+      hsl(var(--muted) / 0.5) 50%,
+      hsl(var(--muted)) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+
+  .mesh-bg {
+    background-color: hsl(var(--background));
+    background-image: var(--tw-gradient-stops);
+  }
+}
+
+/* ── Animations ─────────────────────────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fade-in { animation: fadeIn 0.25s ease; }
+.animate-slide-up { animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+.animate-scale-in { animation: scaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
