@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Search, StickyNote, Loader2, Filter } from "lucide-react";
+import { Search, StickyNote, Filter } from "lucide-react";
 import { useNotes } from "@/hooks/use-notes";
 import { NoteCard } from "./note-card";
 import { cn } from "@/lib/utils";

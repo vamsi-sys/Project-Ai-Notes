@@ -2,12 +2,10 @@
 
 import { StickyNote, Sparkles, FileText, Zap } from "lucide-react";
 import { useNotes } from "@/hooks/use-notes";
-import { useAiStatus } from "@/hooks/use-ai-status";
 import { cn } from "@/lib/utils";
 
 export function StatsBar() {
   const { data: notes } = useNotes();
-  const { aiStatus } = useAiStatus();
 
   const total = notes?.length ?? 0;
   const aiNotes = notes?.filter((n) => n.mode === "ai").length ?? 0;
